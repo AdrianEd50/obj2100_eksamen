@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class Obj2100EksamenApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(Obj2100EksamenApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(Obj2100EksamenApplication.class, args);
+    }
 
 }
