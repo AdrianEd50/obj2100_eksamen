@@ -20,8 +20,7 @@ public class Billett {
     @Column(name = "b_erbetalt")
     private boolean erBetalt;
 
-    public Billett() {
-    }
+    public Billett() {}
 
     public Billett(String billettkode, int visningsnr, boolean erBetalt) {
         this.billettkode = billettkode;

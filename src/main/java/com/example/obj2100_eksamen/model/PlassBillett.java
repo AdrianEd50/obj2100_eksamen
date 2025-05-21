@@ -1,4 +1,4 @@
-package com.example.obj2100_eksamen.model;
+/*package com.example.obj2100_eksamen.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -25,5 +25,44 @@ public class PlassBillett {
     @Id
     @Column(name = "pb_billettkode")
     private String pbBillettKode;
-}
+    private Integer visningsnr;
 
+    public void setPbVisningsnr(Integer visningsnr) {
+        this.visningsnr = visningsnr;
+    }
+}*/
+
+
+package com.example.obj2100_eksamen.model;
+
+import jakarta.persistence.*;
+
+@Entity
+@IdClass(PlassBillettId.class)
+public class PlassBillett {
+
+    @Id
+    private int pbRadNr;
+
+    @Id
+    private int pbSeteNr;
+
+    @Column(nullable = false)
+    private int visningsnr;
+
+    public PlassBillett() {}
+
+    public PlassBillett(int pbRadNr, int pbSeteNr, int visningsnr) {
+        this.pbRadNr = pbRadNr;
+        this.pbSeteNr = pbSeteNr;
+        this.visningsnr = visningsnr;
+    }
+
+    // getters og setters
+    public int getPbRadNr() { return pbRadNr; }
+    public void setPbRadNr(int pbRadNr) { this.pbRadNr = pbRadNr; }
+    public int getPbSeteNr() { return pbSeteNr; }
+    public void setPbSeteNr(int pbSeteNr) { this.pbSeteNr = pbSeteNr; }
+    public int getVisningsnr() { return visningsnr; }
+    public void setVisningsnr(int visningsnr) { this.visningsnr = visningsnr; }
+}

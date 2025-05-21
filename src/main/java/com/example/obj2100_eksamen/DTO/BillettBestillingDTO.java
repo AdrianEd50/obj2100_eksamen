@@ -1,5 +1,3 @@
-package com.example.obj2100_eksamen.DTO;
-
 /*import com.example.obj2100_eksamen.DTO.PlassDTO;
 import lombok.Data;
 
@@ -21,12 +19,18 @@ public class BillettBestillingDTO {
 }
 */
 
+package com.example.obj2100_eksamen.DTO;
+
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
 public class BillettBestillingDTO {
-    //private String billettkode;
     private Integer visningsnr;
+    private List<PlassDTO> plasser;
 }
+
+

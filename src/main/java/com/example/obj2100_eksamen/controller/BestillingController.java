@@ -1,4 +1,4 @@
-package com.example.obj2100_eksamen.controller;
+/*package com.example.obj2100_eksamen.controller;
 
 import com.example.obj2100_eksamen.DTO.BestillingRequestDTO;
 import com.example.obj2100_eksamen.DTO.BillettBestillingDTO;
@@ -28,6 +28,54 @@ public class BestillingController {
 
         String kode = bestillingService.registrerBestilling(dto, plasser);
         return ResponseEntity.ok("Bestilling bekreftet! Din kode: " + kode);
+    }
+}*/
+
+
+package com.example.obj2100_eksamen.controller;
+
+import com.example.obj2100_eksamen.DTO.*;
+import com.example.obj2100_eksamen.model.Visning;
+import com.example.obj2100_eksamen.repository.VisningRepository;
+import com.example.obj2100_eksamen.service.BestillingService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/bestilling")
+public class BestillingController {
+
+    @Autowired
+    private BestillingService bestillingService;
+
+    @Autowired
+    private VisningRepository visningRepository;
+
+    @GetMapping("/visninger")
+    public List<VisningDTO> hentTilgjengeligeVisninger() {
+        return bestillingService.hentKommendeVisninger();
+    }
+
+    @GetMapping("/plasser/{visningsnr}")
+    public List<PlassDTO> hentLedigePlasser(@PathVariable int visningsnr) {
+        return bestillingService.hentLedigePlasserForVisning(visningsnr);
+    }
+
+    @PostMapping("/registrer")
+    public ResponseEntity<BestillingsResponsDTO> registrerBestilling(@RequestBody BillettBestillingDTO dto) {
+        String kode = bestillingService.registrerBestilling(dto);
+        double pris = visningRepository.findById(dto.getVisningsnr()).get().getPris().doubleValue();
+        int antall = dto.getPlasser().size();
+
+        BestillingsResponsDTO respons = new BestillingsResponsDTO();
+        respons.setBillettkode(kode);
+        respons.setAntall(antall);
+        respons.setTotalPris(antall * pris);
+
+        return ResponseEntity.ok(respons);
     }
 }
 
